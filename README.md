@@ -54,7 +54,7 @@ Stop laelaps with
 <kbd>ctrl</kbd>+<kbd>C</kbd>
 
 ### Running with docker-compose
-Start the laelaps container with (make sure there is a ``conf.toml`` in the root of the project):
+Start the laelaps container with (make sure there is a ``config.toml`` in the root of the project):
 ```shell
 docker-compose up
 ```
