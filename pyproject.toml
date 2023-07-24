@@ -27,7 +27,7 @@ dependencies = [
     "numpy == 1.23.4",
     "pandas == 1.5.1",
     "pydantic == 1.10.2",
-    "cryptography == 38.0.1",
+    "cryptography == 41.0.2",
     "structlog == 22.1.0",
     "toml == 0.10.2",
 ]
