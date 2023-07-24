@@ -1,8 +1,8 @@
-# SPDX-FileCopyrightText: 2022 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
 
-FROM python:3.10.6-slim
+FROM python:3.11.4-slim
 
 # Copy files
 COPY . .

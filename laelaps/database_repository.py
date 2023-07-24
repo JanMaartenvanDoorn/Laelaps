@@ -1,7 +1,6 @@
-# SPDX-FileCopyrightText: 2022 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
-
 """Defines database repository."""
 import sqlite3
 from pathlib import Path

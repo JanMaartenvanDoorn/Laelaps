@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
 
@@ -71,7 +71,7 @@ class TestEmailHeadersParser(unittest.TestCase):
         result = self.email_header_parser._parse_address(test_message_headers, "From")
 
         # Assert
-        self.assertEqual(result, "hello@hello.com")
+        self.assertEqual(result, ["hello@hello.com"])
 
     def test_parse_to_address(self):
         # Arange

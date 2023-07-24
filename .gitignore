@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
 
@@ -141,3 +141,6 @@ config.toml
 output
 docs/laelaps.rst
 docs/modules.rst
+
+# VSCode files
+.vscode
