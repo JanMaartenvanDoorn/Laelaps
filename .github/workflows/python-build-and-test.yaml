@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: python:3.11-slim
     steps:
     # Checkout code
     - name: Checkout code
