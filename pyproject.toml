@@ -31,7 +31,7 @@ dependencies = [
     "structlog == 23.1.0",
     "toml == 0.10.2",
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.10.6"
 
 [project.optional-dependencies]
 test = [
@@ -55,7 +55,7 @@ test = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Marmalade8478/Laelaps"
+Homepage = "https://github.com/JanMaartenvanDoorn/Laelaps"
 
 [tool.pytest.ini_options]
 addopts = "--cov=laelaps --cov-fail-under=99  --cov-report xml:cov.xml"
