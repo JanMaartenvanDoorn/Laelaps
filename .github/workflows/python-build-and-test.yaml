@@ -33,7 +33,7 @@ jobs:
     - name: mypy
       run: mypy laelaps
     - name: pydocstyle
-      run: pydocstule laelaps
+      run: pydocstyle laelaps
     - name: pylint
       run: pylint laelaps
     - name: pytest
