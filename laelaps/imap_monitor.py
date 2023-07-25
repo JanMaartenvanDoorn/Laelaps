@@ -75,7 +75,7 @@ async def idle_loop(
             # Get Uids of new messages
             email_uids = await imap_repository.get_uids_new_messages()
 
-            # Handle the new emails, usually this is only one. However in the event that there are multiple new messages we procces all of them.
+            # Handle the new emails, usually this is only one. However in the event that there are multiple new messages we process all of them.
             for uid in email_uids:
                 # Get the new email message from the server.
                 binary_email_headers = (

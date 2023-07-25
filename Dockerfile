@@ -8,7 +8,7 @@ FROM python:3.11.4-slim
 COPY . .
 
 # Install dependencies
-RUN echo "nameserver 9.9.9.9" > /etc/resolv.conf && pip install --upgrade pip && pip install .
+RUN pip install --upgrade pip && pip install .
 
 # Start app
 CMD python -m laelaps
