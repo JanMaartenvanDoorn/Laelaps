@@ -18,14 +18,14 @@ As a bonus, albeit rather experimental, Laelaps can perform other checks on inco
 
 Laelaps moves incoming messages either to an inbox folder for messages that passed validation or to a folder that failed validation.
 
-## Installation
+## Install
 Run the following in your favorite python environment.
 
 ```shell
 pip install laelaps
 ```
 
-## Configuring
+## Configure
 Create a `config.toml` with the following contents in your working directory:
 
 ```toml
@@ -45,7 +45,7 @@ target_folder_verified = "FolderToForVerifiedEmails"
 target_folder_failed_validation = "FolderToForFailedVerificationEmails"
 ```
 
-## Running
+## Run
 Start laelaps with:
 ```shell
 python -m laelaps
@@ -53,10 +53,19 @@ python -m laelaps
 Stop laelaps with
 <kbd>ctrl</kbd>+<kbd>C</kbd>
 
-### Running with docker-compose
+### Run with podman-compose
+Make sure you have installed [Podman](https://podman.io/).
 Start the laelaps container with (make sure there is a ``config.toml`` in the root of the project):
 ```shell
-docker-compose up
+podman-compose up
+```
+
+Stop laelaps with
+<kbd>ctrl</kbd>+<kbd>C</kbd>
+
+Clean up with:
+```shell
+podman-compose down
 ```
 
 ## Develop
