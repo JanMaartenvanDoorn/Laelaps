@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2022 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 
 SPDX-License-Identifier: MPL-2.0
 -->
@@ -54,7 +54,7 @@ Stop laelaps with
 <kbd>ctrl</kbd>+<kbd>C</kbd>
 
 ### Running with docker-compose
-Start the laelaps container with (make sure there is a ``conf.toml`` in the root of the project):
+Start the laelaps container with (make sure there is a ``config.toml`` in the root of the project):
 ```shell
 docker-compose up
 ```

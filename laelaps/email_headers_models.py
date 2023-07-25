@@ -1,7 +1,6 @@
-# SPDX-FileCopyrightText: 2022 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
-
 """Defines internal data models."""
 from datetime import datetime
 from enum import Enum
@@ -29,7 +28,8 @@ class Result(Enum):
 class AuthenticationResult(BaseModel):
     """Describes the Authentication result.
 
-    Note that this does not contain all the information that is available in the authentication headers and a selection of interesting information is made.
+    Note that this does not contain all the information that is available in the authentication headers and a selection
+    of interesting information is made.
 
     :param BaseModel: Pydantic base model
 
@@ -66,18 +66,19 @@ class Transaction(BaseModel):
 class EmailHeaders(BaseModel):
     """Describes the internal model for the email headers.
 
-    Note that this does not contain all the information that is available in the headers. A selection of interesting information is made.
+    Note that this does not contain all the information that is available in the headers. A selection of interesting
+    information is made.
 
     :param BaseModel: Pydantic base model
 
     """
 
-    to_address: list[str]
+    to_address: str | list[str]
     from_address: str
     authentication_results: AuthenticationResult
     recieved: list[Transaction]
-    cc_address: list[str]
-    bcc_address: list[str]
+    cc_address: str | list[str]
+    bcc_address: str | list[str]
 
     def __getitem__(self, item):
         """Get item via a key-value index."""

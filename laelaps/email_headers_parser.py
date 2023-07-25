@@ -1,7 +1,6 @@
-# SPDX-FileCopyrightText: 2022 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
-
 """Define email header parser."""
 import re
 from datetime import datetime
@@ -32,7 +31,8 @@ class EmailHeadersParser:
     def __init__(self, own_domains: list[str]) -> None:
         """Initialize the email header parser.
 
-        :param own_domains: A list of domains that are owned by the user to identify the to_address of the user in case of multiple to_addresses.
+        :param own_domains: A list of domains that are owned by the user to identify the to_address of the user in case
+            of multiple to_addresses.
 
         """
         self.own_domains = own_domains
@@ -47,7 +47,7 @@ class EmailHeadersParser:
 
         parsed_email = EmailHeaders(
             to_address=self._parse_address(message_headers, "To"),
-            from_address=self._parse_address(message_headers, "From"),
+            from_address=self._parse_address(message_headers, "From")[0],
             authentication_results=self._parse_authentication_result(message_headers),
             recieved=self._parse_recieved(message_headers),
             cc_address=self._parse_address(message_headers, "Cc"),
@@ -55,12 +55,12 @@ class EmailHeadersParser:
         )
         return parsed_email
 
-    def _parse_address(self, message_headers: Message, index: str) -> str | list[str]:
+    def _parse_address(self, message_headers: Message, index: str) -> list[str]:
         if message_headers[index] is None:
             return [""]
 
         if index == "From":
-            return re.findall(EMAIL_REGEX, message_headers[index])[0]
+            return [re.findall(EMAIL_REGEX, message_headers[index])[0]]
         if index == "To":
             to_addresses = []
             for own_domain in self.own_domains:
@@ -78,7 +78,6 @@ class EmailHeadersParser:
 
     @staticmethod
     def _parse_authentication_result(message_headers: Message) -> AuthenticationResult:
-
         if message_headers["Authentication-Results"] is None:
             return AuthenticationResult(
                 **{check: Result("none") for check in SERVER_SIDE_CHECKS}
@@ -103,7 +102,6 @@ class EmailHeadersParser:
         ) in (
             message_headers._headers  # type: ignore[attr-defined] # pylint: disable=protected-access
         ):
-
             if entry[0] == "Received":
                 from_domain = entry[1].split(" ")[1]
                 if to_addresses := re.findall(EMAIL_REGEX, entry[1]):

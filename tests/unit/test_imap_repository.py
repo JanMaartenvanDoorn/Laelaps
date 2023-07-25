@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
 
@@ -12,7 +12,6 @@ from laelaps.imap_repository import IMAPRepository
 @mock.patch("laelaps.imap_repository.aioimaplib.IMAP4_SSL")
 class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
     def setUp(self) -> None:
-
         return super().setUp()
 
     async def test_context_manager(self, mock_client):
@@ -101,7 +100,6 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
             mailbox=mailbox,
             ssl_context=ssl_context,
         ) as imap_client:
-
             result = await imap_client.get_uids_new_messages()
 
             # Assert
@@ -135,7 +133,6 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
             mailbox=mailbox,
             ssl_context=ssl_context,
         ) as imap_client:
-
             result = await imap_client.get_uids_new_messages()
 
             # Assert
@@ -169,7 +166,6 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
             mailbox=mailbox,
             ssl_context=ssl_context,
         ) as imap_client:
-
             result = await imap_client.get_raw_new_email_headers_from_server("TEST")
 
             # Assert
@@ -203,7 +199,6 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
             mailbox=mailbox,
             ssl_context=ssl_context,
         ) as imap_client:
-
             result = await imap_client.get_raw_new_email_headers_from_server("TEST")
 
             # Assert
