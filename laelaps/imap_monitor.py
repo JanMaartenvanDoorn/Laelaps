@@ -1,7 +1,6 @@
-# SPDX-FileCopyrightText: 2022 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
-
 """Defines the main loop."""
 import asyncio
 import re
@@ -70,7 +69,6 @@ async def idle_loop(
 
         # Start loop
         while signal_handler.keep_monitoring():
-
             # Wait until a new email message is recieved by the server.
             idle = await imap_repository.wait_for_new_email_message()
 
@@ -169,7 +167,6 @@ def decide_target_folder(email_headers: EmailHeaders, config: dict) -> str:
     )
     validations["send_from_allowed_domain"] = False
     for domain in allowed_domains:
-
         if allowed_domain_pattern.match(domain):
             validations.update({"send_from_allowed_domain": True})
 

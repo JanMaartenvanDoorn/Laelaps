@@ -1,7 +1,6 @@
-# SPDX-FileCopyrightText: 2022 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
-
 """Defines imap repository."""
 import asyncio
 import ssl
@@ -44,7 +43,8 @@ class IMAPRepository:
         :param mailbox: Folder that needs to be monitored
         :param host: host of the imap server, defaults to "127.0.0.1"
         :param timeout: timeout in seconds, defaults to 30
-        :param ssl_context: SSL Context to be used when connecting to the imap server, defaults to ssl.create_default_context()
+        :param ssl_context: SSL Context to be used when connecting to the imap server, defaults to
+            ssl.create_default_context()
 
         """
         self.logger = structlog.getLogger(self.__class__.__name__)

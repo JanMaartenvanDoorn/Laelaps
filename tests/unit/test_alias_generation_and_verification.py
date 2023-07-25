@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2022 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
 
@@ -17,7 +17,6 @@ from laelaps.alias_generation_and_verification import (
 
 class TestAliasGeneration(unittest.TestCase):
     def setUp(self) -> None:
-
         self.key: str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         self.own_domain: str = "test.com"
 
@@ -34,7 +33,7 @@ class TestAliasGeneration(unittest.TestCase):
         # Assert
         self.assertEqual(alias.split("-")[0], "other")
         self.assertEqual(alias.split("@")[1], self.own_domain)
-        self.assertEqual(alias_verification.as_dict()["original_email"], alias)
+        self.assertEqual(alias_verification.as_dict()["original"], alias)
         self.assertIsInstance(alias_verification, email_validator.ValidatedEmail)
 
     def test_validate_email(self):
