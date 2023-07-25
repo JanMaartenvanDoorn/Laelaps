@@ -20,10 +20,10 @@ class TestEmailHeadersParser(unittest.TestCase):
         return super().setUp()
 
     @mock.patch("laelaps.email_headers_parser.BytesHeaderParser.parsebytes")
-    @mock.patch("laelaps.email_headers_parser.EmailHeadersParser._parse_recieved")
-    def test_parse(self, parse_recieved_mock, bytes_parser_mock):
-        # Arange
-        parse_recieved_mock.return_value = [
+    @mock.patch("laelaps.email_headers_parser.EmailHeadersParser._parse_received")
+    def test_parse(self, parse_received_mock, bytes_parser_mock):
+        # Arrange
+        parse_received_mock.return_value = [
             Transaction(
                 from_domain="mx.somemailserver.net",
                 to_address="hello@hello.com",
@@ -45,7 +45,7 @@ class TestEmailHeadersParser(unittest.TestCase):
             authentication_results=AuthenticationResult(
                 dkim="none", spf="none", dmarc="none"
             ),
-            recieved=[
+            received=[
                 Transaction(
                     from_domain="mx.somemailserver.net",
                     to_address="hello@hello.com",
@@ -64,7 +64,7 @@ class TestEmailHeadersParser(unittest.TestCase):
         self.assertEqual(result, expected_result)
 
     def test_parse_from_address(self):
-        # Arange
+        # Arrange
         test_message_headers = {"From": "hello@hello.com"}
 
         # Act
@@ -74,7 +74,7 @@ class TestEmailHeadersParser(unittest.TestCase):
         self.assertEqual(result, ["hello@hello.com"])
 
     def test_parse_to_address(self):
-        # Arange
+        # Arrange
         test_message_headers = {"To": "hello@owndomain.org"}
 
         # Act
@@ -84,7 +84,7 @@ class TestEmailHeadersParser(unittest.TestCase):
         self.assertEqual(result, ["hello@owndomain.org"])
 
     def test_parse_to_address_not_own_domain(self):
-        # Arange
+        # Arrange
         test_message_headers = {"To": "hello@notowndomain.org"}
 
         # Act
@@ -94,7 +94,7 @@ class TestEmailHeadersParser(unittest.TestCase):
         self.assertEqual(result, [""])
 
     def test_parse_address_no_index(self):
-        # Arange
+        # Arrange
         test_message_headers = {"From": None}
 
         # Act
@@ -104,7 +104,7 @@ class TestEmailHeadersParser(unittest.TestCase):
         self.assertEqual(result, [""])
 
     def test_parse_cc_address(self):
-        # Arange
+        # Arrange
         test_message_headers = {"Cc": "hello@anydomain.org"}
 
         # Act
@@ -114,7 +114,7 @@ class TestEmailHeadersParser(unittest.TestCase):
         self.assertEqual(result, ["hello@anydomain.org"])
 
     def test_parse_authentication_result_empty_header(self):
-        # Arange
+        # Arrange
         test_message_headers = {"Authentication-Results": None}
         expected_result = AuthenticationResult(
             **{"dkim": "none", "spf": "none", "dmarc": "none"}
@@ -128,7 +128,7 @@ class TestEmailHeadersParser(unittest.TestCase):
         self.assertEqual(result, expected_result)
 
     def test_parse_authentication_result(self):
-        # Arange
+        # Arrange
         test_message_headers = {"Authentication-Results": "spf=pass, dkim=fail"}
         expected_result = AuthenticationResult(
             **{"dkim": "fail", "spf": "pass", "dmarc": "none"}
@@ -141,8 +141,8 @@ class TestEmailHeadersParser(unittest.TestCase):
         # Assert
         self.assertEqual(result, expected_result)
 
-    def test_parse_recieved(self):
-        # Arange
+    def test_parse_received(self):
+        # Arrange
         test_message_headers = MagicMock()
         test_message_headers._headers = [
             [
@@ -168,14 +168,14 @@ class TestEmailHeadersParser(unittest.TestCase):
         ]
 
         # Act
-        result = self.email_header_parser._parse_recieved(test_message_headers)
+        result = self.email_header_parser._parse_received(test_message_headers)
 
         # Assert
         self.assertEqual(result, expected_result)
 
     @mock.patch("laelaps.email_headers_parser.datetime")
-    def test_parse_recieved_unknown_timestamp(self, dt_mock):
-        # Arange
+    def test_parse_received_unknown_timestamp(self, dt_mock):
+        # Arrange
 
         dt_mock.utcnow = mock.Mock(
             return_value=datetime(2022, 9, 23, 13, 18, 48, tzinfo=timezone.utc)
@@ -198,7 +198,7 @@ class TestEmailHeadersParser(unittest.TestCase):
         ]
 
         # Act
-        result = self.email_header_parser._parse_recieved(test_message_headers)
+        result = self.email_header_parser._parse_received(test_message_headers)
 
         # Assert
         self.assertEqual(result, expected_result)

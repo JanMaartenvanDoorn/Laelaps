@@ -24,7 +24,7 @@ class EmailHeadersParser:
     """Email header parser.
 
     This class parses relevant information from the raw header strings to pydantic models to facilitate a well-defined
-    informaiton flow within the monitor.
+    information flow within the monitor.
 
     """
 
@@ -49,7 +49,7 @@ class EmailHeadersParser:
             to_address=self._parse_address(message_headers, "To"),
             from_address=self._parse_address(message_headers, "From")[0],
             authentication_results=self._parse_authentication_result(message_headers),
-            recieved=self._parse_recieved(message_headers),
+            received=self._parse_received(message_headers),
             cc_address=self._parse_address(message_headers, "Cc"),
             bcc_address=self._parse_address(message_headers, "Bcc"),
         )
@@ -65,9 +65,9 @@ class EmailHeadersParser:
             to_addresses = []
             for own_domain in self.own_domains:
                 to_addresses += [
-                    addres
-                    for addres in re.findall(EMAIL_REGEX, message_headers[index])
-                    if own_domain == addres.split("@")[1]
+                    address
+                    for address in re.findall(EMAIL_REGEX, message_headers[index])
+                    if own_domain == address.split("@")[1]
                 ]
             if to_addresses:
                 return to_addresses
@@ -95,7 +95,7 @@ class EmailHeadersParser:
         return AuthenticationResult(**checks_result)
 
     @staticmethod
-    def _parse_recieved(message_headers: Message) -> list[Transaction]:
+    def _parse_received(message_headers: Message) -> list[Transaction]:
         transaction_path = []
         for (
             entry

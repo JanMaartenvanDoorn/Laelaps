@@ -15,7 +15,7 @@ from laelaps.email_headers_models import (
 
 class TestModels(unittest.TestCase):
     def test_authentication_result(self):
-        # Arange
+        # Arrange
         test_authentication_result = AuthenticationResult(
             spf="none", dkim="pass", dmarc="fail"
         )
@@ -27,7 +27,7 @@ class TestModels(unittest.TestCase):
         self.assertEqual(dkim, Result.PASSED)
 
     def test_transaction(self):
-        # Arange
+        # Arrange
         test_transaction = Transaction(
             from_domain="from.com",
             to_address="hello@hello.com",
@@ -42,14 +42,14 @@ class TestModels(unittest.TestCase):
         self.assertTrue(tls)
 
     def test_email_headers(self):
-        # Arange
+        # Arrange
         test_email_headers = EmailHeaders(
             to_address=[""],
             from_address="from@from.com",
             authentication_results=AuthenticationResult(
                 dkim="none", spf="none", dmarc="none"
             ),
-            recieved=[
+            received=[
                 Transaction(
                     from_domain="mx.somemailserver.net",
                     to_address="hello@hello.com",

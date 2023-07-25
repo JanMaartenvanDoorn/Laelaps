@@ -36,7 +36,7 @@ class TestSignalHandler(unittest.TestCase):
 @mock.patch("laelaps.imap_monitor.DatabaseRepository.get_allowed_domains")
 class TestDecideTargetFolder(unittest.TestCase):
     def test_decide_target_folder_happy_flow(self, db_mock):
-        # Arange
+        # Arrange
         db_mock.return_value = ["from.com"]
         test_headers = EmailHeaders(
             to_address=["test@test.com"],
@@ -46,7 +46,7 @@ class TestDecideTargetFolder(unittest.TestCase):
             ),
             bcc_address=[],
             cc_address=[],
-            recieved=[
+            received=[
                 Transaction(
                     from_domain="from.com",
                     to_address="test@test.com",
@@ -73,7 +73,7 @@ class TestDecideTargetFolder(unittest.TestCase):
         self.assertEqual(result, "INBOX")
 
     def test_decide_target_folder_failed_validation(self, db_mock):
-        # Arange
+        # Arrange
         db_mock.return_value = []
         test_headers = EmailHeaders(
             to_address=["test@test.com"],
@@ -83,7 +83,7 @@ class TestDecideTargetFolder(unittest.TestCase):
             ),
             bcc_address=[],
             cc_address=[],
-            recieved=[
+            received=[
                 Transaction(
                     from_domain="from.com",
                     to_address="test@test.com",
@@ -156,7 +156,7 @@ class TestIDLELoop(unittest.IsolatedAsyncioTestCase):
             ),
             bcc_address=[],
             cc_address=[],
-            recieved=[
+            received=[
                 Transaction(
                     from_domain="from.com",
                     to_address="test@test.com",

@@ -74,7 +74,7 @@ class IMAPRepository:
 
         """
         search_result = await self.imap_client.uid_search("UNSEEN")
-        # First entry indicates if search was succesfull
+        # First entry indicates if search was successful
         # Second entry contains a list of which the first entry contains the results
         # and the second contains information about the search itself.
         if search_result[0] == "OK":
@@ -84,7 +84,7 @@ class IMAPRepository:
     async def get_raw_new_email_headers_from_server(
         self, uid: str
     ) -> aioimaplib.Response | None:
-        """Get raw email headers for message with specifified uid.
+        """Get raw email headers for message with specified uid.
 
         :param uid: Uid of the message
         :return: Raw message headers
@@ -111,7 +111,7 @@ class IMAPRepository:
     async def __aenter__(self):
         """Enter context manager.
 
-        Takes care of seting up the IMAP connection and selecting the relevant folder.
+        Takes care of setting up the IMAP connection and selecting the relevant folder.
 
         :return: An instance of this class.
 
