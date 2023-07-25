@@ -24,7 +24,7 @@ class TestAliasGeneration(unittest.TestCase):
         return super().setUp()
 
     def test_generate_alias(self):
-        # Arange
+        # Arrange
         other_domain: str = "other.com"
 
         # Act
@@ -37,7 +37,7 @@ class TestAliasGeneration(unittest.TestCase):
         self.assertIsInstance(alias_verification, email_validator.ValidatedEmail)
 
     def test_validate_email(self):
-        # Arange
+        # Arrange
         email = "@@@@"
 
         # Act
@@ -57,7 +57,7 @@ class TestAliasVerification(unittest.TestCase):
         return super().setUp()
 
     def test_extract_and_validate_information_happy_flow(self):
-        # Arange
+        # Arrange
         alias: str = "other-0EFCF5804239mM6G490b6pGJAG3uCfBCVA@test.com"
 
         # Act
@@ -76,7 +76,7 @@ class TestAliasVerification(unittest.TestCase):
         )
 
     def test_extract_and_validate_information_hash_does_not_match(self):
-        # Arange
+        # Arrange
         alias: str = "otger-0EFCF5804239mM6G490b6pGJAG3uCfBCVA@test.com"
 
         # Act
@@ -95,7 +95,7 @@ class TestAliasVerification(unittest.TestCase):
         )
 
     def test_extract_and_validate_information_fake_address(self):
-        # Arange
+        # Arrange
         alias: str = "other-EAC3B_97A76ACdpYMcGNK24fAgyHTruOf@test.com"
 
         # Act
@@ -114,7 +114,7 @@ class TestAliasVerification(unittest.TestCase):
         )
 
     def test_extract_and_validate_information_undecodable_address(self):
-        # Arange
+        # Arrange
         alias: str = "aaaaa-EAC3B_87A76ACdpYMcGNK24fAgyHTruOfh@test.com"
 
         # Act
@@ -133,7 +133,7 @@ class TestAliasVerification(unittest.TestCase):
         )
 
     def test_extract_and_validate_information_wrong_password(self):
-        # Arange
+        # Arrange
         alias: str = "aaaaa-EAC3B_87A76ACdpYMcGNK24fAgyHTruOfh@test.com"
         self.alias_information_extractor = AliasInformationExtractor(
             "wrong-key", self.own_domain
@@ -155,7 +155,7 @@ class TestAliasVerification(unittest.TestCase):
         )
 
     def test_extract_and_validate_old_address(self):
-        # Arange
+        # Arrange
         alias: str = "aaaaa-EAC3B_87A76ACdpYMcGNK24-AgyHTruOfh@test.com"
         self.alias_information_extractor = AliasInformationExtractor(
             "wrong-key", self.own_domain

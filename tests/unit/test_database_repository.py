@@ -15,7 +15,7 @@ class TestDatabaseRepository(unittest.TestCase):
     def setUp(self) -> None:
         """Setup test database."""
         self.database_repository = DatabaseRepository(TEST_DATABASE_PATH)
-        self.database_repository.initialize_database()
+        self.database_repository._initialize_database()
         return super().setUp()
 
     def tearDown(self) -> None:
@@ -24,7 +24,7 @@ class TestDatabaseRepository(unittest.TestCase):
         return super().tearDown()
 
     def test_register_and_get_allowed_domains(self):
-        # Arange
+        # Arrange
         self.database_repository.register_allowed_domains(
             "alias@test.com", "testdomain.com"
         )

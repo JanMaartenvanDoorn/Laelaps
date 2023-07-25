@@ -9,17 +9,17 @@ DEFAULT_DATABASE_PATH = Path("local_test.db")
 
 
 class DatabaseRepository:
-    """Repository that give acces to all information stored in the database."""
+    """Repository that give access to all information stored in the database."""
 
     def __init__(self, database_filepath: Path = DEFAULT_DATABASE_PATH) -> None:
         """Initialize database repository."""
         self.connection = sqlite3.connect(database_filepath)
-        # self._initialize_database()
+        self._initialize_database()
 
-    def initialize_database(self) -> None:
-        """Make a new database connection."""
+    def _initialize_database(self) -> None:
+        """Initialize database if not already done."""
         cur = self.connection.cursor()
-        query = """CREATE TABLE "alias_domain" (
+        query = """CREATE TABLE IF NOT EXISTS "alias_domain" (
                     "alias"	TEXT,
                     "domain"	TEXT UNIQUE,
                     PRIMARY KEY("domain"),

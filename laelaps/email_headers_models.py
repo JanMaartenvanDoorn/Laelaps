@@ -45,7 +45,7 @@ class AuthenticationResult(BaseModel):
 
 
 class Transaction(BaseModel):
-    """Describes a receive transation.
+    """Describes a receive transaction.
 
     A chain or list of these transactions makes it possible to trace the path of the email before it was delivered.
 
@@ -76,7 +76,7 @@ class EmailHeaders(BaseModel):
     to_address: str | list[str]
     from_address: str
     authentication_results: AuthenticationResult
-    recieved: list[Transaction]
+    received: list[Transaction]
     cc_address: str | list[str]
     bcc_address: str | list[str]
 

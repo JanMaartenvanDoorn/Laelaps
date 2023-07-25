@@ -69,7 +69,7 @@ async def idle_loop(
 
         # Start loop
         while signal_handler.keep_monitoring():
-            # Wait until a new email message is recieved by the server.
+            # Wait until a new email message is received by the server.
             idle = await imap_repository.wait_for_new_email_message()
 
             # Get Uids of new messages
@@ -106,7 +106,7 @@ def decide_target_folder(email_headers: EmailHeaders, config: dict) -> str:
     :return: Target folder on the imap folder.
 
     """
-    logger = structlog.getLogger("Recieve email listener")
+    logger = structlog.getLogger("Receive email listener")
 
     validations = {}
 
@@ -130,7 +130,7 @@ def decide_target_folder(email_headers: EmailHeaders, config: dict) -> str:
         validations["from_address_validation"] = bool(from_address_validation)
     except EmailNotValidError as exception:
         logger.error(
-            "From addres is not a valid email address.",
+            "From address is not a valid email address.",
             alias=email_headers.from_address,
             exception=exception.__class__.__name__,
         )
@@ -145,14 +145,14 @@ def decide_target_folder(email_headers: EmailHeaders, config: dict) -> str:
         }
     )
 
-    # Check if email was transfered using TLS
-    for transfer in email_headers.recieved:
+    # Check if email was transferred using TLS
+    for transfer in email_headers.received:
         # For now ok if any of the transactions used TLS
         # TODO make this more advanced such that TLS is required for all transactions outside own MTA's
         if transfer.tls:
             validations.update({"tls": True})
 
-    # Validate if alias was registred for sending domain
+    # Validate if alias was registered for sending domain
     # Get relations for this alias (to_address)
     database_repository = DatabaseRepository()
     allowed_domains = database_repository.get_allowed_domains(

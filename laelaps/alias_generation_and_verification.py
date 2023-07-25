@@ -160,7 +160,7 @@ class AliasInformationExtractor(AliasBaseClass):
 
         to_decrypt = encrypted[-ENCRYPTED_PART_LENGTH_AFTER_ENCRYPTION:]
 
-        # Check for old style aliassses, they cannot be decrypted
+        # Check for old style aliases, they cannot be decrypted
         if "-" in to_decrypt:
             return {
                 "checked_alias": alias,
