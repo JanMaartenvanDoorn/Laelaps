@@ -29,8 +29,8 @@ jobs:
         run: black --check .
       - name: bandit
         run: bandit -r ./laelaps
-      - name: pflake8
-        run: pflake8 .
+      - name: flake8
+        run: flake8 .
       - name: mypy
         run: mypy laelaps
       - name: pydocstyle
