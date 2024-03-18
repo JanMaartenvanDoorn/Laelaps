@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-FROM python:3.11.4-slim
+FROM python:3.12.4-slim
 
 # Copy files
 COPY . .
