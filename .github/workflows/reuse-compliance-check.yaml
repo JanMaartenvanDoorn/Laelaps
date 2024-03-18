@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2024 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
 name: REUSE Compliance Check
@@ -9,6 +9,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: REUSE Compliance Check
-      uses: fsfe/reuse-action@v2
+      - uses: actions/checkout@v3
+      - name: REUSE Compliance Check
+        uses: fsfe/reuse-action@v2
