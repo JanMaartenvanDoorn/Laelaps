@@ -82,7 +82,7 @@ extend-ignore = ["E501", "W605"]
 max-complexity = 10
 
 [mypy]
-python_version = "3.11"
+python_version = "3.12"
 no_implicit_optional = true
 scripts_are_modules = true
 warn_unused_ignores = true
