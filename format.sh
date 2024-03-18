@@ -7,7 +7,7 @@ bandit -r ./laelaps
 black .
 isort .
 docformatter --in-place ./laelaps/*.py ./laelaps/*.py
-pflake8 .
+flake8 .
 pydocstyle laelaps
 mypy laelaps
 pylint laelaps

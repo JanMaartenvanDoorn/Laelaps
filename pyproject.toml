@@ -3,12 +3,12 @@
 # SPDX-License-Identifier: MPL-2.0
 
 [build-system]
-requires      = ["setuptools>=68.0.0", "wheel"]
+requires      = ["setuptools>=69.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "laelaps"
-version = "0.0.3"
+version = "0.0.4"
 description = "Catchall email alias monitor and verifier"
 readme = "README.md"
 authors = [{ name = "Jan Maarten van Doorn", email = "laelaps@vandoorn.cloud" }]
@@ -16,42 +16,42 @@ license = { text = "MPL-2.0" }
 classifiers = [
     "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
 keywords = ["catchall","email", "alias", "monitor", "verification"]
 dependencies = [
     "aioimaplib == 1.0.1",
-    "email_validator == 2.0.0",
-    "IMAPClient == 2.3.1",
-    "nest_asyncio == 1.5.6",
-    "numpy == 1.25.1",
-    "pandas == 2.0.3",
-    "pydantic == 2.0.3",
-    "cryptography == 41.0.2",
-    "structlog == 23.1.0",
+    "email_validator == 2.1.1",
+    "IMAPClient == 3.0.1",
+    "nest_asyncio == 1.6.0",
+    "numpy == 1.26.4",
+    "pandas == 2.2.1",
+    "pydantic == 2.6.4",
+    "cryptography == 42.0.5",
+    "structlog == 24.1.0",
     "toml == 0.10.2",
 ]
-requires-python = ">=3.10.6"
+requires-python = ">=3.12.2"
 
 [project.optional-dependencies]
 test = [
-    "pandas-stubs == 2.0.2.230605",
-    "types-toml == 0.10.8.7",
-    "autoflake == 2.2.0",
-    "bandit == 1.7.5",
-    "black == 23.7.0",
+    "pandas-stubs == 2.2.1.240316",
+    "types-toml == 0.10.8.20240310",
+    "autoflake == 2.3.1",
+    "bandit == 1.7.8",
+    "black == 24.3.0",
     "docformatter == 1.7.5",
-    "flake8 ~= 6.0.0",
-    "mypy == 1.4.1",
+    "flake8 ~= 7.0.0",
+    "mypy == 1.9.0",
     "mypy-extensions == 1.0.0",
     "pydocstyle == 6.3.0",
-    "pyflakes == 3.0.1",
-    "pytest == 7.4.0",
+    "pyflakes == 3.2.0",
+    "pytest == 8.1.1",
     "pytest-cov == 4.1.0",
-    "pylint == 2.17.4",
-    "pylint-gitlab == 1.2.0",
-    "pyproject-flake8 == 6.0.0.post1",
-    "reuse == 2.1.0",
+    "pylint == 3.1.0",
+    "pylint-gitlab == 2.0.0",
+    "Flake8-pyproject == 1.2.3",
+    "reuse == 3.0.1",
 ]
 
 [project.urls]
