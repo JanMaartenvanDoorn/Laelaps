@@ -78,7 +78,7 @@ class AliasGenerator(AliasBaseClass):
 
     def generate_alias(
         self, other_domain: str
-    ) -> tuple[str, email_validator.ValidatedEmail]:
+    ) -> tuple[str, email_validator.ValidatedEmail | None]:
         """Generate an alias for an external domain.
 
         :param other_domain: external domain for which the alias has to be generated
