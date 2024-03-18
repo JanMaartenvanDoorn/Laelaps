@@ -2,9 +2,7 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-version: "3.9"
+version: "3.11"
 services:
   laelaps:
     build: .
-    ports:
-      - 993:993
