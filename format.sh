@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2024 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
 
@@ -7,7 +7,7 @@ bandit -r ./laelaps
 black .
 isort .
 docformatter --in-place ./laelaps/*.py ./laelaps/*.py
-pflake8 .
+flake8 .
 pydocstyle laelaps
 mypy laelaps
 pylint laelaps

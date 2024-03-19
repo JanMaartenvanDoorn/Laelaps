@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2023 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2024 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
 name: Python Build and Test
@@ -9,33 +9,33 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: python:3.11-slim
+    container: python:3.12-slim
     steps:
-    # Checkout code
-    - name: Checkout code
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-    # Install
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip setuptools wheel
-        pip install .
-        pip install .[test]
-    - name: isort
-      run: isort . --check-only
-    - name: black
-      run: black --check .
-    - name: bandit
-      run: bandit -r ./laelaps
-    - name: pflake8
-      run: pflake8 .
-    - name: mypy
-      run: mypy laelaps
-    - name: pydocstyle
-      run: pydocstyle laelaps
-    - name: pylint
-      run: pylint laelaps
-    - name: pytest
-      run: pytest tests
+      # Install
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install .
+          pip install .[test]
+      - name: isort
+        run: isort . --check-only
+      - name: black
+        run: black --check .
+      - name: bandit
+        run: bandit -r ./laelaps
+      - name: flake8
+        run: flake8 .
+      - name: mypy
+        run: mypy laelaps
+      - name: pydocstyle
+        run: pydocstyle laelaps
+      - name: pylint
+        run: pylint laelaps
+      - name: pytest
+        run: pytest tests
