@@ -177,7 +177,7 @@ class TestIDLELoop(unittest.IsolatedAsyncioTestCase):
         logger_mock = mock.MagicMock()
         structlog_mock.getLogger.return_value = logger_mock
 
-        user = "USER"
+        username = "USER"
         password = "PASSWORD"
         mailbox = "MAILBOX"
         host = "HOST"
@@ -185,7 +185,7 @@ class TestIDLELoop(unittest.IsolatedAsyncioTestCase):
         # Act
         await idle_loop(
             host=host,
-            user=user,
+            username=username,
             password=password,
             mailbox=mailbox,
             config={
@@ -200,7 +200,7 @@ class TestIDLELoop(unittest.IsolatedAsyncioTestCase):
 
         # Assert
         initialized_mock_client.wait_hello_from_server.assert_called_once()
-        initialized_mock_client.login.assert_awaited_once_with(user, password)
+        initialized_mock_client.login.assert_awaited_once_with(username, password)
         initialized_mock_client.select.assert_called_once_with(mailbox=mailbox)
         initialized_mock_client.logout.assert_called_once()
 
@@ -213,10 +213,16 @@ class TestMain(unittest.TestCase):
         toml_mock.load.return_value = {
             "imap": {
                 "host": "HOST",
-                "user": "USER",
+                "username": "USER",
                 "password": "PASSWORD",
                 "mailbox": "MAILBOX",
-            }
+            },
+            "user": {
+                "own_domains": ["test.com"],
+                "target_folder_failed_validation": "Failed",
+                "target_folder_verified": "Verified",
+            },
+            "encryption": {"key": "asdasdasdasdasdasdasdasdasdasd"},
         }
 
         # Act

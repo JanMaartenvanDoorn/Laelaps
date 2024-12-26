@@ -12,6 +12,7 @@ import toml
 from email_validator import EmailNotValidError, caching_resolver, validate_email
 
 from laelaps.alias_generation_and_verification import AliasInformationExtractor
+from laelaps.config_model import ConfigModel
 from laelaps.database_repository import DatabaseRepository
 from laelaps.email_headers_models import EmailHeaders, Result
 from laelaps.email_headers_parser import SERVER_SIDE_CHECKS, EmailHeadersParser
@@ -45,13 +46,13 @@ class SignalHandler:
 
 
 async def idle_loop(
-    host: str, user: str, password: str, mailbox: str, config: dict
+    host: str, username: str, password: str, mailbox: str, config: dict
 ) -> None:
     """Start the idle loop.
 
     Handles the actual imap IDLE loop that monitors for new messages on the server.
 
-    :param user: Username to log in to the imap server
+    :param username: Username to log in to the imap server
     :param password: Password to log in to the imap server
     :param mailbox: Folder that needs to be monitored
     :param host: Host of the imap server
@@ -62,7 +63,7 @@ async def idle_loop(
 
     # Start context manager
     async with IMAPRepository(
-        host=host, user=user, password=password, mailbox=mailbox
+        host=host, username=username, password=password, mailbox=mailbox
     ) as imap_repository:
         logger = structlog.getLogger("Imap Monitor")
         logger.info("Monitoring folder.", folder=mailbox)
@@ -82,7 +83,7 @@ async def idle_loop(
                     await imap_repository.get_raw_new_email_headers_from_server(uid)
                 )
 
-                # Parse email
+                # Parse email headers
                 if binary_email_headers:
                     email_headers = EmailHeadersParser(
                         config["user"]["own_domains"]  # type: ignore
@@ -183,5 +184,26 @@ def decide_target_folder(email_headers: EmailHeaders, config: dict) -> str:
 
 def main() -> None:
     """Run the main loop."""
-    config = toml.load("./config.toml")
+    logger = structlog.getLogger("Main")
+    # Try to get config from file
+    try:
+        # Build config from file
+        config = ConfigModel.model_validate(toml.load("./config.toml"))
+    except FileNotFoundError:
+        logger.warning("Config file not found.")
+
+    # Try to get config from environment variables if file is not found
+    if not config:
+        try:
+            config = ConfigModel()
+        except KeyError:
+            logger.warning("Environment variable not found.")
+
+    if not config:
+        logger.error("No config found, exiting.")
+        return
+
+    config = config.model_dump()
+
+    logger.info("Starting monitor.")
     asyncio.run(idle_loop(**config["imap"], config=config))

@@ -27,6 +27,7 @@ dependencies = [
     "numpy == 2.2.1",
     "pandas == 2.2.3",
     "pydantic == 2.10.4",
+    "pydantic-settings == 2.7.0",
     "cryptography == 43.0.1",
     "structlog == 24.4.0",
     "toml == 0.10.2",
@@ -83,6 +84,7 @@ max-complexity = 10
 
 [mypy]
 python_version = "3.13"
+plugins = ['pydantic.mypy']
 no_implicit_optional = true
 scripts_are_modules = true
 warn_unused_ignores = true
