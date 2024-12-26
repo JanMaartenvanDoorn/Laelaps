@@ -29,7 +29,7 @@ class IMAPRepository:
 
     def __init__(
         self,
-        user: str,
+        username: str,
         password: str,
         mailbox: str,
         host: str = "127.0.0.1",
@@ -38,7 +38,7 @@ class IMAPRepository:
     ):
         """Initialize context manager.
 
-        :param user: Username to log in to the imap server
+        :param username: Username to log in to the imap server
         :param password: Password to log in to the imap server
         :param mailbox: Folder that needs to be monitored
         :param host: host of the imap server, defaults to "127.0.0.1"
@@ -48,7 +48,7 @@ class IMAPRepository:
 
         """
         self.logger = structlog.getLogger(self.__class__.__name__)
-        self.user = user
+        self.username = username
         self.password = password
         self.mailbox = mailbox
         self.logger.info("Initializing IMAP context.")
@@ -117,10 +117,12 @@ class IMAPRepository:
 
         """
         await self.imap_client.wait_hello_from_server()
-        await self.imap_client.login(self.user, self.password)
+        await self.imap_client.login(self.username, self.password)
         await self.imap_client.select(mailbox=self.mailbox)
         self.logger.info(
-            "Logged in to IMAP server", host=self.imap_client.host, user=self.user
+            "Logged in to IMAP server",
+            host=self.imap_client.host,
+            username=self.username,
         )
         return self
 

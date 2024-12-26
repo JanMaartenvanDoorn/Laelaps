@@ -177,7 +177,7 @@ class TestIDLELoop(unittest.IsolatedAsyncioTestCase):
         logger_mock = mock.MagicMock()
         structlog_mock.getLogger.return_value = logger_mock
 
-        user = "USER"
+        username = "USER"
         password = "PASSWORD"
         mailbox = "MAILBOX"
         host = "HOST"
@@ -185,7 +185,7 @@ class TestIDLELoop(unittest.IsolatedAsyncioTestCase):
         # Act
         await idle_loop(
             host=host,
-            user=user,
+            username=username,
             password=password,
             mailbox=mailbox,
             config={
@@ -200,23 +200,29 @@ class TestIDLELoop(unittest.IsolatedAsyncioTestCase):
 
         # Assert
         initialized_mock_client.wait_hello_from_server.assert_called_once()
-        initialized_mock_client.login.assert_awaited_once_with(user, password)
+        initialized_mock_client.login.assert_awaited_once_with(username, password)
         initialized_mock_client.select.assert_called_once_with(mailbox=mailbox)
         initialized_mock_client.logout.assert_called_once()
 
 
-@mock.patch("laelaps.imap_monitor.toml")
 @mock.patch("laelaps.imap_monitor.asyncio.run")
 class TestMain(unittest.TestCase):
-    def test_main(self, run_mock, toml_mock):
+    @mock.patch("laelaps.imap_monitor.toml")
+    def test_main_config_file(self, toml_mock, run_mock):
         # Arrange
         toml_mock.load.return_value = {
             "imap": {
                 "host": "HOST",
-                "user": "USER",
+                "username": "USER",
                 "password": "PASSWORD",
                 "mailbox": "MAILBOX",
-            }
+            },
+            "user": {
+                "own_domains": ["test.com"],
+                "target_folder_failed_validation": "Failed",
+                "target_folder_verified": "Verified",
+            },
+            "encryption": {"key": "asdasdasdasdasdasdasdasdasdasd"},
         }
 
         # Act
@@ -224,3 +230,43 @@ class TestMain(unittest.TestCase):
 
         # Assert
         toml_mock.load.assert_called()
+        run_mock.assert_called()
+
+    @mock.patch("laelaps.imap_monitor.idle_loop")
+    def test_main_no_environment_variables_and_no_config_file(
+        self, run_mock, ideloop_mock
+    ):
+        # Act
+        main()
+
+        # Assert
+        run_mock.assert_not_called()
+
+    @mock.patch("laelaps.imap_monitor.ConfigModel")
+    def test_main_no_config_file(self, config_model_mock, run_mock):
+        # Arrange
+        init_config_mock = mock.MagicMock()
+
+        config_model_mock.side_effect = [init_config_mock]
+
+        init_config_mock.model_dump.return_value = {
+            "imap": {
+                "host": "HOST",
+                "username": "USER",
+                "password": "PASSWORD",
+                "mailbox": "MAILBOX",
+            },
+            "user": {
+                "own_domains": ["test.com"],
+                "target_folder_failed_validation": "Failed",
+                "target_folder_verified": "Verified",
+            },
+            "encryption": {"key": "asdasdasdasdasdasdasdasdasdasd"},
+        }
+
+        # Act
+        main()
+
+        # Assert
+        config_model_mock.assert_called()
+        run_mock.assert_called()

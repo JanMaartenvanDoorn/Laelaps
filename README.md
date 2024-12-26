@@ -34,7 +34,7 @@ Create a `config.toml` with the following contents in your working directory:
 ```toml
 [imap]
 host = "your.imap.server.host"
-user = "yourImapUserName"
+username = "yourImapUserName"
 password = "ImapPassword"
 mailbox = "FolderToMonitor"
 
