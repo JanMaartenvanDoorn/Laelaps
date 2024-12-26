@@ -177,7 +177,7 @@ class TestEmailHeadersParser(unittest.TestCase):
     def test_parse_received_unknown_timestamp(self, dt_mock):
         # Arrange
 
-        dt_mock.utcnow = mock.Mock(
+        dt_mock.now = mock.Mock(
             return_value=datetime(2022, 9, 23, 13, 18, 48, tzinfo=timezone.utc)
         )
         test_message_headers = MagicMock()

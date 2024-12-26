@@ -10,7 +10,7 @@ Library of functions and classes to enable alias generation
 import hashlib
 import secrets
 from base64 import urlsafe_b64decode, urlsafe_b64encode
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 
 import email_validator
 import numpy as np
@@ -87,7 +87,7 @@ class AliasGenerator(AliasBaseClass):
         """
         other_domain_tag = other_domain.split(".")[-2] + "-"
 
-        date_int = str(datetime.utcnow().date()).replace("-", "")
+        date_int = str(datetime.now(tz=timezone.utc).date()).replace("-", "")
 
         desired_length_random_part = (
             MAXIMUM_LENGTH

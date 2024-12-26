@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MPL-2.0
 """Define email header parser."""
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from email.message import Message
 from email.parser import BytesHeaderParser
 
@@ -114,7 +114,7 @@ class EmailHeadersParser:
                         "%a, %d %b %Y %H:%M:%S %z",
                     )
                 except (ValueError, IndexError):
-                    timestamp = datetime.utcnow()
+                    timestamp = datetime.now(tz=timezone.utc)
 
                 tls = "using TLS" in entry[1].split(";")[0]
 
