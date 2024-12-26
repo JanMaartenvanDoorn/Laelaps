@@ -10,6 +10,7 @@ from types import FrameType
 import structlog
 import toml
 from email_validator import EmailNotValidError, caching_resolver, validate_email
+from pydantic.error_wrappers import ValidationError
 
 from laelaps.alias_generation_and_verification import AliasInformationExtractor
 from laelaps.config_model import ConfigModel
@@ -186,20 +187,22 @@ def main() -> None:
     """Run the main loop."""
     logger = structlog.getLogger("Main")
     # Try to get config from file
+    config = None
     try:
         # Build config from file
-        config = ConfigModel.model_validate(toml.load("./config.toml"))
+        config_from_file = toml.load("./config.toml")
+        config = ConfigModel.model_validate(config_from_file)
     except FileNotFoundError:
         logger.warning("Config file not found.")
 
     # Try to get config from environment variables if file is not found
-    if not config:
+    if config is None:
         try:
             config = ConfigModel()  # type: ignore
-        except KeyError:
+        except ValidationError:
             logger.warning("Environment variable not found.")
 
-    if not config:
+    if config is None:
         logger.error("No config found, exiting.")
         return
 

@@ -1,6 +1,15 @@
+# SPDX-FileCopyrightText: 2024 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 from pydantic import ValidationError
 
-from laelaps.config_model import EncryptionConfigModel, ImapConfigModel, UserConfigModel
+from laelaps.config_model import (
+    ConfigModel,
+    EncryptionConfigModel,
+    ImapConfigModel,
+    UserConfigModel,
+)
 
 
 def test_user_config_model_valid():
@@ -78,3 +87,30 @@ def test_encryption_config_model_valid():
     config = EncryptionConfigModel(key="KEY")
     # Assert
     assert config.key.get_secret_value() == "KEY"
+
+
+def test_config_model_valid():
+    # Arrange & Act
+    config = ConfigModel(
+        imap=ImapConfigModel(
+            host="imap.gmail.com",
+            mailbox="INBOX",
+            username="USERNAME",
+            password="PASSWORD",
+        ),
+        user=UserConfigModel(
+            own_domains=["example.com", "test.com"],
+            target_folder_verified="Verified",
+            target_folder_failed_validation="Failed Validation",
+        ),
+        encryption=EncryptionConfigModel(key="KEY"),
+    )
+    # Assert
+    assert config.imap.host == "imap.gmail.com"
+    assert config.imap.mailbox == "INBOX"
+    assert config.imap.username == "USERNAME"
+    assert config.imap.password.get_secret_value() == "PASSWORD"
+    assert config.user.own_domains == ["example.com", "test.com"]
+    assert config.user.target_folder_verified == "Verified"
+    assert config.user.target_folder_failed_validation == "Failed Validation"
+    assert config.encryption.key.get_secret_value() == "KEY"
