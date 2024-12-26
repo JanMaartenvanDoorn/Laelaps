@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
-version: "3.12"
+version: "3.13"
 services:
   laelaps:
     build: .

@@ -16,42 +16,42 @@ license = { text = "MPL-2.0" }
 classifiers = [
     "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
 ]
 keywords = ["catchall","email", "alias", "monitor", "verification"]
 dependencies = [
-    "aioimaplib == 1.0.1",
-    "email_validator == 2.1.1",
+    "aioimaplib == 1.1.0",
+    "email_validator == 2.2.0",
     "IMAPClient == 3.0.1",
     "nest_asyncio == 1.6.0",
-    "numpy == 1.26.4",
-    "pandas == 2.2.1",
-    "pydantic == 2.6.4",
-    "cryptography == 42.0.5",
-    "structlog == 24.1.0",
+    "numpy == 2.2.1",
+    "pandas == 2.2.3",
+    "pydantic == 2.10.4",
+    "cryptography == 43.0.1",
+    "structlog == 24.4.0",
     "toml == 0.10.2",
 ]
-requires-python = ">=3.12.2"
+requires-python = ">=3.13.0"
 
 [project.optional-dependencies]
 test = [
     "pandas-stubs == 2.2.1.240316",
     "types-toml == 0.10.8.20240310",
     "autoflake == 2.3.1",
-    "bandit == 1.7.8",
-    "black == 24.3.0",
+    "bandit == 1.8.0",
+    "black == 24.10.0",
     "docformatter == 1.7.5",
-    "flake8 ~= 7.0.0",
-    "mypy == 1.9.0",
+    "flake8 ~= 7.1.1",
+    "mypy == 1.14.0",
     "mypy-extensions == 1.0.0",
     "pydocstyle == 6.3.0",
     "pyflakes == 3.2.0",
-    "pytest == 8.1.1",
-    "pytest-cov == 4.1.0",
-    "pylint == 3.1.0",
-    "pylint-gitlab == 2.0.0",
+    "pytest == 8.3.4",
+    "pytest-cov == 6.0.0",
+    "pylint == 3.3.3",
+    "pylint-gitlab == 2.0.1",
     "Flake8-pyproject == 1.2.3",
-    "reuse == 3.0.1",
+    "reuse == 5.0.2",
 ]
 
 [project.urls]
@@ -82,7 +82,7 @@ extend-ignore = ["E501", "W605"]
 max-complexity = 10
 
 [mypy]
-python_version = "3.12"
+python_version = "3.13"
 no_implicit_optional = true
 scripts_are_modules = true
 warn_unused_ignores = true

@@ -18,7 +18,7 @@ from laelaps.alias_generation_and_verification import (
 class TestAliasGeneration(unittest.TestCase):
     def setUp(self) -> None:
         self.key: str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        self.own_domain: str = "test.com"
+        self.own_domain: str = "mail.com"
 
         self.alias_generator = AliasGenerator(self.key, self.own_domain)
         return super().setUp()
