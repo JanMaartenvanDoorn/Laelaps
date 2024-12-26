@@ -195,7 +195,7 @@ def main() -> None:
     # Try to get config from environment variables if file is not found
     if not config:
         try:
-            config = ConfigModel()
+            config = ConfigModel() # type: ignore
         except KeyError:
             logger.warning("Environment variable not found.")
 
@@ -203,7 +203,7 @@ def main() -> None:
         logger.error("No config found, exiting.")
         return
 
-    config = config.model_dump()
+    config_dict = config.model_dump()
 
     logger.info("Starting monitor.")
-    asyncio.run(idle_loop(**config["imap"], config=config))
+    asyncio.run(idle_loop(**config_dict["imap"], config=config_dict))
