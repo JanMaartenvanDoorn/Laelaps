@@ -195,7 +195,7 @@ def main() -> None:
     # Try to get config from environment variables if file is not found
     if not config:
         try:
-            config = ConfigModel() # type: ignore
+            config = ConfigModel()  # type: ignore
         except KeyError:
             logger.warning("Environment variable not found.")
 
