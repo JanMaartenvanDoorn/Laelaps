@@ -10,7 +10,7 @@ from types import FrameType
 import structlog
 import toml
 from email_validator import EmailNotValidError, caching_resolver, validate_email
-from pydantic.error_wrappers import ValidationError
+from pydantic import ValidationError
 
 from laelaps.alias_generation_and_verification import AliasInformationExtractor
 from laelaps.config_model import ConfigModel
