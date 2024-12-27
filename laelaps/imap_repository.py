@@ -7,6 +7,7 @@ import ssl
 
 import structlog
 from aioimaplib import aioimaplib
+from pydantic import SecretStr
 
 HEADERS_TO_FETCH = {
     "Authentication-Results",
@@ -30,7 +31,7 @@ class IMAPRepository:
     def __init__(
         self,
         username: str,
-        password: str,
+        password: SecretStr,
         mailbox: str,
         host: str = "127.0.0.1",
         timeout: float = 30,
@@ -49,7 +50,7 @@ class IMAPRepository:
         """
         self.logger = structlog.getLogger(self.__class__.__name__)
         self.username = username
-        self.password = password
+        self.password = password.get_secret_value()
         self.mailbox = mailbox
         self.logger.info("Initializing IMAP context.")
         self.imap_client = aioimaplib.IMAP4_SSL(

@@ -10,7 +10,7 @@ from types import FrameType
 import structlog
 import toml
 from email_validator import EmailNotValidError, caching_resolver, validate_email
-from pydantic import ValidationError
+from pydantic import SecretStr, ValidationError
 
 from laelaps.alias_generation_and_verification import AliasInformationExtractor
 from laelaps.config_model import ConfigModel
@@ -47,7 +47,7 @@ class SignalHandler:
 
 
 async def idle_loop(
-    host: str, username: str, password: str, mailbox: str, config: dict
+    host: str, username: str, password: SecretStr, mailbox: str, config: dict
 ) -> None:
     """Start the idle loop.
 

@@ -8,6 +8,7 @@ import unittest
 
 import email_validator
 import numpy as np
+from pydantic import SecretStr
 
 from laelaps.alias_generation_and_verification import (
     AliasGenerator,
@@ -17,7 +18,7 @@ from laelaps.alias_generation_and_verification import (
 
 class TestAliasGeneration(unittest.TestCase):
     def setUp(self) -> None:
-        self.key: str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        self.key: str = SecretStr("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         self.own_domain: str = "mail.com"
 
         self.alias_generator = AliasGenerator(self.key, self.own_domain)
@@ -49,7 +50,7 @@ class TestAliasGeneration(unittest.TestCase):
 
 class TestAliasVerification(unittest.TestCase):
     def setUp(self) -> None:
-        self.key: str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        self.key: str = SecretStr("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         self.own_domain: str = "test.com"
         self.alias_information_extractor = AliasInformationExtractor(
             self.key, self.own_domain
@@ -136,7 +137,7 @@ class TestAliasVerification(unittest.TestCase):
         # Arrange
         alias: str = "aaaaa-EAC3B_87A76ACdpYMcGNK24fAgyHTruOfh@test.com"
         self.alias_information_extractor = AliasInformationExtractor(
-            "wrong-key", self.own_domain
+            SecretStr("wrong-key"), self.own_domain
         )
 
         # Act
@@ -158,7 +159,7 @@ class TestAliasVerification(unittest.TestCase):
         # Arrange
         alias: str = "aaaaa-EAC3B_87A76ACdpYMcGNK24-AgyHTruOfh@test.com"
         self.alias_information_extractor = AliasInformationExtractor(
-            "wrong-key", self.own_domain
+            SecretStr("wrong-key"), self.own_domain
         )
 
         # Act

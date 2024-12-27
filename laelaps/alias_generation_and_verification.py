@@ -17,6 +17,7 @@ import numpy as np
 import structlog
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from email_validator import EmailNotValidError, caching_resolver, validate_email
+from pydantic import SecretStr
 
 # Global config test
 MAXIMUM_LENGTH: int = 40  # Maximum length of the local part of the alias
@@ -37,7 +38,7 @@ TEXT_ENCODING: str = "utf-8"  # Encoding that is used for hashes and encryption
 class AliasBaseClass:
     """Base class for an alias."""
 
-    def __init__(self, password: str, own_domain: str = ""):
+    def __init__(self, password: SecretStr, own_domain: str = ""):
         """Initialize object.
 
         :param password: user password
@@ -45,7 +46,7 @@ class AliasBaseClass:
 
         """
         self.own_domain = own_domain
-        self.key = password
+        self.key = password.get_secret_value()
         self.logger = structlog.getLogger(self.__class__.__name__)
 
     @staticmethod

@@ -8,6 +8,8 @@ import unittest
 from datetime import datetime
 from unittest import mock
 
+from pydantic import SecretStr
+
 from laelaps.email_headers_models import AuthenticationResult, EmailHeaders, Transaction
 from laelaps.imap_monitor import SignalHandler, decide_target_folder, idle_loop, main
 
@@ -61,7 +63,7 @@ class TestDecideTargetFolder(unittest.TestCase):
             test_headers,
             config={
                 "imap": {},
-                "encryption": {"key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+                "encryption": {"key": SecretStr("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")},
                 "user": {
                     "own_domains": ["test.com"],
                     "target_folder_verified": "INBOX",
@@ -98,7 +100,7 @@ class TestDecideTargetFolder(unittest.TestCase):
             test_headers,
             config={
                 "imap": {},
-                "encryption": {"key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+                "encryption": {"key": SecretStr("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")},
                 "user": {
                     "own_domains": ["test.com"],
                     "target_folder_failed_validation": "Inbox/FailedValidation",
@@ -178,7 +180,7 @@ class TestIDLELoop(unittest.IsolatedAsyncioTestCase):
         structlog_mock.getLogger.return_value = logger_mock
 
         username = "USER"
-        password = "PASSWORD"
+        password = SecretStr("PASSWORD")
         mailbox = "MAILBOX"
         host = "HOST"
 
@@ -190,7 +192,7 @@ class TestIDLELoop(unittest.IsolatedAsyncioTestCase):
             mailbox=mailbox,
             config={
                 "imap": {},
-                "encryption": {"key": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+                "encryption": {"key": SecretStr("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")},
                 "user": {
                     "own_domains": ["test.com"],
                     "target_folder_failed_validation": "Failed",
@@ -200,7 +202,9 @@ class TestIDLELoop(unittest.IsolatedAsyncioTestCase):
 
         # Assert
         initialized_mock_client.wait_hello_from_server.assert_called_once()
-        initialized_mock_client.login.assert_awaited_once_with(username, password)
+        initialized_mock_client.login.assert_awaited_once_with(
+            username, password.get_secret_value()
+        )
         initialized_mock_client.select.assert_called_once_with(mailbox=mailbox)
         initialized_mock_client.logout.assert_called_once()
 

@@ -6,6 +6,8 @@ import ssl
 import unittest
 from unittest import mock
 
+from pydantic import SecretStr
+
 from laelaps.imap_repository import IMAPRepository
 
 
@@ -20,7 +22,7 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
         mock_client.return_value = initialized_mock_client
 
         username = "USER"
-        password = "PASSWORD"
+        password = SecretStr("PASSWORD")
         mailbox = "MAILBOX"
         host = "HOST"
         ssl_context = ssl.create_default_context()
@@ -41,7 +43,9 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
             host=host, timeout=30, ssl_context=ssl_context
         )
         initialized_mock_client.wait_hello_from_server.assert_called_once()
-        initialized_mock_client.login.assert_awaited_once_with(username, password)
+        initialized_mock_client.login.assert_awaited_once_with(
+            username, password.get_secret_value()
+        )
         initialized_mock_client.select.assert_called_once_with(mailbox=mailbox)
         initialized_mock_client.logout.assert_called_once()
 
@@ -51,7 +55,7 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
         mock_client.return_value = initialized_mock_client
 
         username = "USER"
-        password = "PASSWORD"
+        password = SecretStr("PASSWORD")
         mailbox = "MAILBOX"
         host = "HOST"
         ssl_context = ssl.create_default_context()
@@ -74,7 +78,9 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
         )
         initialized_mock_client.idle_done.assert_called_once()
         initialized_mock_client.wait_hello_from_server.assert_called_once()
-        initialized_mock_client.login.assert_awaited_once_with(username, password)
+        initialized_mock_client.login.assert_awaited_once_with(
+            username, password.get_secret_value()
+        )
         initialized_mock_client.select.assert_called_once_with(mailbox=mailbox)
         initialized_mock_client.logout.assert_called_once()
 
@@ -87,7 +93,7 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
             ["a b".encode("utf-8")],
         ]
         username = "USER"
-        password = "PASSWORD"
+        password = SecretStr("PASSWORD")
         mailbox = "MAILBOX"
         host = "HOST"
         ssl_context = ssl.create_default_context()
@@ -110,7 +116,9 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
         )
         initialized_mock_client.uid_search.assert_called_once()
         initialized_mock_client.wait_hello_from_server.assert_called_once()
-        initialized_mock_client.login.assert_awaited_once_with(username, password)
+        initialized_mock_client.login.assert_awaited_once_with(
+            username, password.get_secret_value()
+        )
         initialized_mock_client.select.assert_called_once_with(mailbox=mailbox)
         initialized_mock_client.logout.assert_called_once()
 
@@ -120,7 +128,7 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
         mock_client.return_value = initialized_mock_client
         initialized_mock_client.uid_search.return_value = [""]
         username = "USER"
-        password = "PASSWORD"
+        password = SecretStr("PASSWORD")
         mailbox = "MAILBOX"
         host = "HOST"
         ssl_context = ssl.create_default_context()
@@ -143,7 +151,9 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
         )
         initialized_mock_client.uid_search.assert_called_once()
         initialized_mock_client.wait_hello_from_server.assert_called_once()
-        initialized_mock_client.login.assert_awaited_once_with(username, password)
+        initialized_mock_client.login.assert_awaited_once_with(
+            username, password.get_secret_value()
+        )
         initialized_mock_client.select.assert_called_once_with(mailbox=mailbox)
         initialized_mock_client.logout.assert_called_once()
 
@@ -153,7 +163,7 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
         mock_client.return_value = initialized_mock_client
         initialized_mock_client.uid.return_value = ["OK"]
         username = "USER"
-        password = "PASSWORD"
+        password = SecretStr("PASSWORD")
         mailbox = "MAILBOX"
         host = "HOST"
         ssl_context = ssl.create_default_context()
@@ -176,7 +186,9 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
         )
         initialized_mock_client.uid.assert_called_once()
         initialized_mock_client.wait_hello_from_server.assert_called_once()
-        initialized_mock_client.login.assert_awaited_once_with(username, password)
+        initialized_mock_client.login.assert_awaited_once_with(
+            username, password.get_secret_value()
+        )
         initialized_mock_client.select.assert_called_once_with(mailbox=mailbox)
         initialized_mock_client.logout.assert_called_once()
 
@@ -186,7 +198,7 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
         mock_client.return_value = initialized_mock_client
         initialized_mock_client.uid.return_value = [""]
         username = "USER"
-        password = "PASSWORD"
+        password = SecretStr("PASSWORD")
         mailbox = "MAILBOX"
         host = "HOST"
         ssl_context = ssl.create_default_context()
@@ -209,7 +221,9 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
         )
         initialized_mock_client.uid.assert_called_once()
         initialized_mock_client.wait_hello_from_server.assert_called_once()
-        initialized_mock_client.login.assert_awaited_once_with(username, password)
+        initialized_mock_client.login.assert_awaited_once_with(
+            username, password.get_secret_value()
+        )
         initialized_mock_client.select.assert_called_once_with(mailbox=mailbox)
         initialized_mock_client.logout.assert_called_once()
 
@@ -219,7 +233,7 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
         mock_client.return_value = initialized_mock_client
 
         username = "USER"
-        password = "PASSWORD"
+        password = SecretStr("PASSWORD")
         mailbox = "MAILBOX"
         host = "HOST"
         ssl_context = ssl.create_default_context()
@@ -241,6 +255,8 @@ class TestImapSSLClient(unittest.IsolatedAsyncioTestCase):
         )
         initialized_mock_client.uid.assert_called_once()
         initialized_mock_client.wait_hello_from_server.assert_called_once()
-        initialized_mock_client.login.assert_awaited_once_with(username, password)
+        initialized_mock_client.login.assert_awaited_once_with(
+            username, password.get_secret_value()
+        )
         initialized_mock_client.select.assert_called_once_with(mailbox=mailbox)
         initialized_mock_client.logout.assert_called_once()
