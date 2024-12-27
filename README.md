@@ -48,6 +48,21 @@ target_folder_verified = "FolderToForVerifiedEmails"
 target_folder_failed_validation = "FolderToForFailedVerificationEmails"
 ```
 
+### Configuring using environment variables
+
+When running Laelaps in a container, it may be useful to configure it using environment variables. If the configuration file cannot be found Laelqaps will look for the following variables:
+
+```shell
+LAELAPS_IMAP__HOST=your.imap.server.host
+LAELAPS_IMAP__MAILBOX=FolderToMonitor
+LAELAPS_IMAP__USERNAME=yourImapUserName
+LAELAPS_IMAP__PASSWORD=ImapPassword
+LAELAPS_USER__OWN_DOMAINS=list.of,own.domains
+LAELAPS_USER__TARGET_FOLDER_VERIFIED=FolderToForVerifiedEmails
+LAELAPS_USER__TARGET_FOLDER_FAILED_VALIDATION=FolderToForFailedVerificationEmails
+LAELAPS_ENCRYPTION__KEY=32CharacterStringEncryptionKey00
+```
+
 ## Run
 
 Start laelaps with:
