@@ -19,5 +19,5 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push Docker image
         run: |
-          docker build . -t ghcr.io/JanMaartenVanDoorn/laelaps:latest -t ghcr.io/JanMaartenVanDoorn/laelaps:${{ github.sha }}
-          docker push --all-tags ghcr.io/JanMaartenVanDoorn/laelaps
+          docker build . -t ghcr.io/janmaartenvandoorn/laelaps:latest -t ghcr.io/janmaartenvandoorn/laelaps:${{ github.sha }}
+          docker push --all-tags ghcr.io/janmaartenvandoorn/laelaps
