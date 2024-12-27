@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2024 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+#
+# SPDX-License-Identifier: MPL-2.0
+name: Publish image to GitHub Container Registry
+on:
+  release:
+    types: [published]
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker image
+        run: |
+          docker build . -t ghcr.io/JanMaartenVanDoorn/laelaps:latest -t ghcr.io/JanMaartenVanDoorn/laelaps:${{ github.sha }}
+          docker push --all-tags ghcr.io/JanMaartenVanDoorn/laelaps
