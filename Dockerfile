@@ -2,7 +2,12 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 
+# Use Python 3.13.1-slim as base image
 FROM python:3.13.1-slim
+
+# Set metadata
+LABEL org.opencontainers.image.source = https://github.com/JanMaartenVanDoorn/laelaps
+LABEL org.opencontainers.image.license = MPL-2.0
 
 # Copy files
 COPY . .
