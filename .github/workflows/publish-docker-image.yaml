@@ -3,14 +3,8 @@
 # SPDX-License-Identifier: MPL-2.0
 name: Publish image to GitHub Container Registry
 on:
-  workflow_dispatch:
-  workflow_call:
-    inputs:
-      image_tag:
-        required: true
-        default: "latest"
-        type: string
-        description: "The docker image tag to deploy"
+  release:
+    types: [published]
 jobs:
   build_and_publish:
     runs-on: ubuntu-latest
