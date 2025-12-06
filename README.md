@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2024 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+SPDX-FileCopyrightText: 2026 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 
 SPDX-License-Identifier: MPL-2.0
 -->
@@ -21,10 +21,31 @@ Laelaps moves incoming messages either to an inbox folder for messages that pass
 
 ## Install
 
-Run the following in your favorite python environment.
+### Setting up with UV
+
+1. **Create a virtual environment** (recommended):
 
 ```shell
-pip install laelaps
+uv venv .venv
+source .venv/bin/activate
+```
+
+2. **Install dependencies**:
+
+```shell
+uv pip sync pyproject.toml
+```
+
+To include test/dev dependencies:
+
+```shell
+uv pip sync --extra test pyproject.toml
+```
+
+3. **Install Laelaps for development** (if needed):
+
+```shell
+uv pip install -e .
 ```
 
 ## Configure
@@ -97,7 +118,7 @@ podman-compose down
 To install dev/test tools run (in the root directory)
 
 ```shell
-pip install .[test]
+uv pip install --extra test
 ```
 
 Running linting and tests is done by running:
