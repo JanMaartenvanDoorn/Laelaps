@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2024 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2026 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
 """Defines the configuration model."""
@@ -64,8 +64,4 @@ class ConfigModel(BaseSettings):
     user: UserConfigModel
     encryption: EncryptionConfigModel
 
-    class Config:
-        """Configuration for the configuration model."""
-
-        env_prefix = "LAELAPS_"
-        env_nested_delimiter = "__"
+    model_config = {"env_prefix": "LAELAPS_", "env_nested_delimiter": "__"}

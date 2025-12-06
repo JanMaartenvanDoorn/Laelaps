@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2024 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+SPDX-FileCopyrightText: 2026 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 
 SPDX-License-Identifier: MPL-2.0
 -->
@@ -21,10 +21,32 @@ Laelaps moves incoming messages either to an inbox folder for messages that pass
 
 ## Install
 
-Run the following in your favorite python environment.
+### Install from pypi
 
 ```shell
 pip install laelaps
+```
+
+
+### Setting up with UV for local development
+
+1. **Create a virtual environment**:
+
+```shell
+uv venv .venv
+source .venv/bin/activate
+```
+
+2. **Install dependencies**:
+
+```shell
+uv pip sync pyproject.toml
+```
+
+To include test/dev dependencies:
+
+```shell
+uv pip sync --extra test pyproject.toml
 ```
 
 ## Configure
@@ -74,34 +96,11 @@ python -m laelaps
 Stop laelaps with
 <kbd>ctrl</kbd>+<kbd>C</kbd>
 
-### Run with podman-compose
+### Run with Docker
+Make sure to have a configuration ready.
 
-Make sure you have installed [Podman](https://podman.io/).
-Start the laelaps container with (make sure there is a `config.toml` in the root of the project):
-
+From the root of the repository run
 ```shell
-podman-compose up
+docker compose up
 ```
 
-Stop laelaps with
-<kbd>ctrl</kbd>+<kbd>C</kbd>
-
-Clean up with:
-
-```shell
-podman-compose down
-```
-
-## Develop
-
-To install dev/test tools run (in the root directory)
-
-```shell
-pip install .[test]
-```
-
-Running linting and tests is done by running:
-
-```shell
-bash format.sh
-```

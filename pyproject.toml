@@ -1,14 +1,14 @@
-# SPDX-FileCopyrightText: 2024 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+# SPDX-FileCopyrightText: 2026 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
 #
 # SPDX-License-Identifier: MPL-2.0
 
 [build-system]
-requires      = ["setuptools>=69.0.0", "wheel"]
+requires      = ["setuptools>=80.9.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "laelaps"
-version = "0.0.5"
+version = "0.0.6"
 description = "Catchall email alias monitor and verifier"
 readme = "README.md"
 authors = [{ name = "Jan Maarten van Doorn", email = "laelaps@vandoorn.cloud" }]
@@ -16,43 +16,75 @@ license = { text = "MPL-2.0" }
 classifiers = [
     "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 keywords = ["catchall","email", "alias", "monitor", "verification"]
 dependencies = [
-    "aioimaplib == 1.1.0",
-    "email_validator == 2.2.0",
+    "aioimaplib == 2.0.1",
+    "email_validator == 2.3.0",
     "IMAPClient == 3.0.1",
     "nest_asyncio == 1.6.0",
-    "numpy == 2.2.1",
-    "pandas == 2.2.3",
-    "pydantic == 2.10.4",
-    "pydantic-settings == 2.7.0",
-    "cryptography == 43.0.1",
-    "structlog == 24.4.0",
+    "numpy == 2.3.5",
+    "pandas == 2.3.3",
+    "pydantic == 2.12.5",
+    "pydantic-settings == 2.12.0",
+    "cryptography == 46.0.3",
+    "structlog == 25.5.0",
     "toml == 0.10.2",
 ]
-requires-python = ">=3.13.0"
+requires-python = ">=3.14.0"
 
 [project.optional-dependencies]
 test = [
-    "pandas-stubs == 2.2.1.240316",
+    "pandas-stubs == 2.3.3.251201",
     "types-toml == 0.10.8.20240310",
-    "autoflake == 2.3.1",
-    "bandit == 1.8.0",
-    "black == 24.10.0",
-    "docformatter == 1.7.5",
+    "autoflake == 2.2.0",
+    "bandit == 1.9.2",
+    "black == 25.11.0",
     "flake8 ~= 7.1.1",
-    "mypy == 1.14.0",
-    "mypy-extensions == 1.0.0",
+    "mypy == 1.19.0",
+    "mypy-extensions == 1.1.0",
     "pydocstyle == 6.3.0",
-    "pyflakes == 3.2.0",
-    "pytest == 8.3.4",
-    "pytest-cov == 6.0.0",
-    "pylint == 3.3.3",
-    "pylint-gitlab == 2.0.1",
-    "Flake8-pyproject == 1.2.3",
-    "reuse == 5.0.2",
+    "pytest == 9.0.1",
+    "pytest-cov == 7.0.0",
+    "pylint == 4.0.4",
+    "pylint-gitlab == 2.1.1",
+    "Flake8-pyproject == 1.2.4",
+    "reuse == 6.2.0",
+    # Dependencies below are dependencies from above packages that somehow are not installed with them
+    "annotated-types",
+    "annotated_types",
+    "markupsafe",
+    "typing_inspection",
+    "pydantic_core",
+    "pytokens",
+    "librt",
+    "tomlkit",
+    "jinja2",
+    "pygments",
+    "pyyaml",
+    "click",
+    "isort",
+    "pycodestyle",
+    "snowballstemmer",
+    "typing_extensions",
+    "astroid",
+    "boolean.py == 4.0",
+    "pluggy",
+    "pathspec",
+    "iniconfig",
+    "coverage",
+    "idna",
+    "platformdirs",
+    "stevedore",
+    "packaging",
+    "rich",
+    "dill",
+    "dotenv",
+    "license_expression",
+    "python-dotenv",
+    "cffi",
+    "dnspython"
 ]
 
 [project.urls]
@@ -83,7 +115,7 @@ extend-ignore = ["E501", "W605"]
 max-complexity = 10
 
 [mypy]
-python_version = "3.13"
+python_version = "3.14"
 plugins = ['pydantic.mypy']
 no_implicit_optional = true
 scripts_are_modules = true
