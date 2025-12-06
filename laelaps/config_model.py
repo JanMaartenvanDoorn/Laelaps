@@ -64,8 +64,7 @@ class ConfigModel(BaseSettings):
     user: UserConfigModel
     encryption: EncryptionConfigModel
 
-    class Config:
-        """Configuration for the configuration model."""
-
-        env_prefix = "LAELAPS_"
-        env_nested_delimiter = "__"
+    model_config = {
+        "env_prefix": "LAELAPS_",
+        "env_nested_delimiter": "__"
+    }
