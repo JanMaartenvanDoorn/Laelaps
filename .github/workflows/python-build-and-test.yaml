@@ -20,7 +20,7 @@ jobs:
       # Install
       - name: Install dependencies
         run: |
-          uv pip install --extra test
+          pip install --extra test
       - name: isort
         run: isort . --check-only
       - name: black
