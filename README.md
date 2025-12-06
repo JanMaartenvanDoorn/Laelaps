@@ -21,9 +21,16 @@ Laelaps moves incoming messages either to an inbox folder for messages that pass
 
 ## Install
 
-### Setting up with UV
+### Install from pypi
 
-1. **Create a virtual environment** (recommended):
+```shell
+pip install laelaps
+```
+
+
+### Setting up with UV for local development
+
+1. **Create a virtual environment**:
 
 ```shell
 uv venv .venv
@@ -40,12 +47,6 @@ To include test/dev dependencies:
 
 ```shell
 uv pip sync --extra test pyproject.toml
-```
-
-3. **Install Laelaps for development** (if needed):
-
-```shell
-uv pip install -e .
 ```
 
 ## Configure
@@ -95,34 +96,11 @@ python -m laelaps
 Stop laelaps with
 <kbd>ctrl</kbd>+<kbd>C</kbd>
 
-### Run with podman-compose
+### Run with Docker
+Make sure to have a configuration ready.
 
-Make sure you have installed [Podman](https://podman.io/).
-Start the laelaps container with (make sure there is a `config.toml` in the root of the project):
-
+From the root of the repository run
 ```shell
-podman-compose up
+docker compose up
 ```
 
-Stop laelaps with
-<kbd>ctrl</kbd>+<kbd>C</kbd>
-
-Clean up with:
-
-```shell
-podman-compose down
-```
-
-## Develop
-
-To install dev/test tools run (in the root directory)
-
-```shell
-uv pip install --extra test
-```
-
-Running linting and tests is done by running:
-
-```shell
-bash format.sh
-```
