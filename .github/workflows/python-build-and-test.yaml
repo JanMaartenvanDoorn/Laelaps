@@ -17,10 +17,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Install
+      # Install dependencies
       - name: Install dependencies
         run: |
-          pip install --extra test
+          pip install --upgrade pip
+          pip install .[test]
       - name: isort
         run: isort . --check-only
       - name: black
