@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Jan Maarten van Doorn <laelaps@vandoorn.cloud>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 version = 1
 revision = 3
 requires-python = ">=3.14.0"
