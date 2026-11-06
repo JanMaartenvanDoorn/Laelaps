@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 """Unit tests for imap_monitor.py"""
+
 import asyncio
 import unittest
 from datetime import datetime

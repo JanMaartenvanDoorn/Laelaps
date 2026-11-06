@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 """Defines the configuration model."""
+
 from pydantic import BaseModel, Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings
 

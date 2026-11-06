@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 """Defines internal data models."""
+
 from datetime import datetime
 from enum import Enum
 
