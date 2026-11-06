@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: MPL-2.0
 
 """Unit tests for generate_sieve_filter.py"""
+
 import datetime
 import unittest
 

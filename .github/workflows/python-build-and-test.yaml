@@ -9,11 +9,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: python:3.14.0-slim
+    container: python:3.14.10-slim
     steps:
       # Checkout code
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 

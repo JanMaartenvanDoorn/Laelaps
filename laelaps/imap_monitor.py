@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 """Defines the main loop."""
+
 import asyncio
 import re
 import signal

@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: MPL-2.0
 """Defines database repository."""
+
 import sqlite3
 from pathlib import Path
 
